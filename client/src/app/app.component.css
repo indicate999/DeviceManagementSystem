@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap; /* Чтобы элементы переносились на новую строку */
+    gap: 15px; /* Расстояние между элементами */
+    justify-content: flex-start; /* Элементы выравниваются слева */
+  }
+  
+  .item {
+    background-color: #4CAF50;
+    color: black;
+    padding: 20px;
+    border-radius: 10px; /* Округлые углы */
+    width: 280px; /* Ширина каждого элемента */
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для красоты */
+    transition: transform 0.3s; /* Анимация на наведение */
+  }
+  
+  .item:hover {
+    transform: translateY(-5px); /* Эффект при наведении мыши */
+  }

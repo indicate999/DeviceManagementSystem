@@ -1,0 +1,21 @@
+<h2 style="padding-bottom: 50px;">Device List</h2>
+
+<div class="container">
+  <div class="item" *ngFor="let device of devices; let i = index">
+    <h3 style="text-align: center;">{{ i + 1 }}</h3>
+    <ul style="list-style-type: none; padding-top: 20px;">
+      <li>
+        <strong>Brand:</strong> {{ device.brand }} 
+      </li>
+      <li>
+        <strong>Manufacturer:</strong> {{ device.manufacturer }} 
+      </li>
+      <li>
+        <strong>Model:</strong> {{ device.modelName }} 
+      </li>
+      <li>
+        <strong>OS:</strong> {{ device.operatingSystem }} 
+      </li>
+    </ul>
+  </div>
+</div>
