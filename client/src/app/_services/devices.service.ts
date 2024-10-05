@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Device } from '../_models/device';
 
@@ -11,5 +11,11 @@ export class DevicesService {
 
   getDevices() {
     return this.http.get<Device[]>('http://localhost:5272/api/devices');
+  }
+
+  addDevice(device: Device) {
+    return this.http.post<Device>('http://localhost:5272/api/devices', device).subscribe(response => {
+      console.log(response);
+    });
   }
 }
