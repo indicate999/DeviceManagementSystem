@@ -1,8 +1,7 @@
-using System.Diagnostics;
 using API.Data;
 using API.DTOs;
 using API.Entities;
-using Microsoft.AspNetCore.Http;
+using API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -12,25 +11,25 @@ namespace API.Controllers
     [ApiController]
     public class DevicesController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly DeviceRepository _deviceRepository;
         private readonly ILogger<DevicesController> _logger;
 
-        public DevicesController(DataContext context, ILogger<DevicesController> logger)
+        public DevicesController(DeviceRepository deviceRepository, ILogger<DevicesController> logger)
         {
-            _context = context;
+            _deviceRepository = deviceRepository;
             _logger = logger;
         }
 
         [HttpGet]
         public ActionResult<List<Device>> GetDevices()
         {
-            var devices = _context.Devices.ToList();
-
-            return devices;
+            _logger.LogDebug("kkkk");
+            _logger.LogDebug(_deviceRepository.ToString());
+            return _deviceRepository.GetDevices();
         }
 
         [HttpPost]
-        public IActionResult AddDevice(DeviceDto deviceDto)
+        public IActionResult AddDevice([FromBody] DeviceDto deviceDto)
         {
             if (deviceDto == null)
             {
@@ -45,11 +44,9 @@ namespace API.Controllers
                 OperatingSystem = deviceDto.OperatingSystem
             };
 
-            _context.Devices.Add(device);
+            _deviceRepository.AddDevice(device);
 
-            int result = _context.SaveChanges();
-
-            if (result > 0)
+            if (_deviceRepository.Complete())
             {
                 return CreatedAtAction(nameof(AddDevice), device);
             }

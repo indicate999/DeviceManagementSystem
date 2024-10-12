@@ -4,6 +4,7 @@ import { DevicesService } from 'src/app/_services/devices.service';
 import { Device } from 'src/app/_models/device';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AddModalComponent } from '../modals/add-modal/add-modal.component';
+import { AddDeviceModalComponent } from '../modals/add-device-modal/add-device-modal.component';
 
 @Component({
   selector: 'app-devices',
@@ -13,24 +14,26 @@ import { AddModalComponent } from '../modals/add-modal/add-modal.component';
 export class DevicesComponent implements OnInit{
 
   devices: Device[] = [];
-  bsModalRef: BsModalRef<AddModalComponent> = new BsModalRef<AddModalComponent>();
+  bsModalRef: BsModalRef<AddDeviceModalComponent> = new BsModalRef<AddDeviceModalComponent>();
 
   constructor(private devicesService: DevicesService, private modalService: BsModalService) {}
 
   ngOnInit(): void {
+    this.loadDevices();
+  }
+
+  loadDevices(): void {
     this.devicesService.getDevices().subscribe((data: Device[]) => {
       this.devices = data;
     });
   }
+ 
+  openAddDeviceModal() {
+    this.bsModalRef = this.modalService.show(AddDeviceModalComponent);
 
-  openAddModal() {
-    const initialState: ModalOptions = {
-      initialState: {
-        title: 'Add device'
-      }
-    }
-    this.bsModalRef = this.modalService.show(AddModalComponent, initialState);
-    this.bsModalRef.content!.closeBtnName = 'Close';
+    this.bsModalRef.content!.deviceAdded.subscribe(() => {
+      this.loadDevices();
+    });
   }
 }
 

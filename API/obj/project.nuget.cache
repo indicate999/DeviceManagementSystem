@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FWJvYQK2HK9gzYDOUMMJYGe5hL/ZduX9NIuqiEZuUUOvX39+rlKkrPL6MAgSwNFFkANlCvH/c1qfvIR89qHzVg==",
+  "dgSpecHash": "t2gngqZ54G20QG4PzhKmWAntzdjTuOKS6ph5eV13siWJbi+TwvGwKWzmqmRA5RnI0ood8PftMp4SQKaToMA9Dw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\API.csproj",
+  "projectFilePath": "c:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ihorn\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ihorn\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.4\\microsoft.aspnetcore.openapi.8.0.4.nupkg.sha512",
