@@ -1,6 +1,6 @@
 using System;
 
-namespace API.DTOs;
+namespace API.BisnessLogic.DTOs;
 
 public class DeviceDto
 {

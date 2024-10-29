@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\API.csproj": {}
+    "C:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\API.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\API.csproj": {
+    "C:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "c:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\API.csproj",
+        "projectPath": "C:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\API.csproj",
         "packagesPath": "C:\\Users\\ihorn\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\obj\\",
+        "outputPath": "C:\\Users\\ihorn\\Projects\\DevicePetProject\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

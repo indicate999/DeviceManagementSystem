@@ -1,4 +1,5 @@
 using API.Data;
+using API.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,16 +13,18 @@ builder.Services.AddSwaggerGen();
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngularApp",
-        builder => builder.WithOrigins("http://localhost:4200")
-                          .AllowAnyMethod()
-                          .AllowAnyHeader());
+	options.AddPolicy("AllowAngularApp",
+		builder => builder.WithOrigins("http://localhost:4200")
+						  .AllowAnyMethod()
+						  .AllowAnyHeader());
 });
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(opt => {
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+	opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 
 
 var app = builder.Build();
@@ -29,8 +32,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

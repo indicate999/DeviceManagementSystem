@@ -5,7 +5,7 @@
 </div>
 
 <div class="container">
-  <div class="item" *ngFor="let device of devices; let i = index">
+  <div class="item" *ngFor="let device of devices; let i = index" (click)="openEditDeviceModal(i)">
     <h3 style="text-align: center;">{{ i + 1 }}</h3>
     <ul style="list-style-type: none; padding-top: 20px;">
       <li>

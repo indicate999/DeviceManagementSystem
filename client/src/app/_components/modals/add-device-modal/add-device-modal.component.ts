@@ -42,7 +42,6 @@ export class AddDeviceModalComponent implements OnInit {
 
       this.addDevice(device);
 
-      //this.deviceForm.reset(); 
       this.bsModalRef.hide();
     }
   }

@@ -7,17 +7,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DevicesService {
-
+  private apiUrl = 'http://localhost:5272/api/devices';
+  
   constructor(private http: HttpClient) { }
 
   public getDevices(): Observable<Device[]> {
-    return this.http.get<Device[]>('http://localhost:5272/api/devices');
+    return this.http.get<Device[]>(this.apiUrl);
   }
 
   public addDevice(device: Device): Observable<Device> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Device>('http://localhost:5272/api/devices', device, { headers });//.subscribe(response => {
-     //console.log(response);
-    //}); 
+    return this.http.post<Device>(this.apiUrl, device);
+  }
+
+  public editDevice(device: Device, deviceId: number): Observable<Device> {
+    return this.http.put<Device>(`${this.apiUrl}/${deviceId}`, device);
   }
 }
