@@ -7,5 +7,6 @@ public interface IDeviceRepository
 	void AddDevice(Device device);
 	void EditDevice(Device device);
 	Device GetDeviceById(int id);
+	void DeleteDevice(Device device);
 	bool Complete();
 }

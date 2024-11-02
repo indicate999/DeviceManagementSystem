@@ -41,6 +41,7 @@
       </div>
   
       <div class="modal-footer">
+        <button type="button" class="btn btn-danger me-auto" (click)="deleteDevice()">Delete</button>
         <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
         <button type="submit" class="btn btn-primary" [disabled]="editDeviceForm.invalid || editDeviceForm.pristine">Save</button>
       </div>

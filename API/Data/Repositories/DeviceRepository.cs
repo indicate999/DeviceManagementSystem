@@ -28,6 +28,11 @@ public class DeviceRepository : IDeviceRepository
 	public Device GetDeviceById(int id) {
 		return _context.Devices.Find(id);	
 	}
+	
+	public void DeleteDevice(Device device) 
+	{
+		_context.Devices.Remove(device);
+	}
 
 	public bool Complete()
 	{

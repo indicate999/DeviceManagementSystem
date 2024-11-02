@@ -38,7 +38,7 @@ export class DevicesComponent implements OnInit{
   }
 
   openEditDeviceModal(deviceID: number) {
-    const initialState = { deviceData: this.devices[deviceID], deviceId: deviceID + 1 };
+    const initialState = { deviceData: this.devices[deviceID]};
 
     this.editDeviceBsModalRef = this.modalService.show(EditDeviceModalComponent, { initialState });
 

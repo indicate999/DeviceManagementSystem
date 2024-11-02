@@ -1,0 +1,154 @@
+# ASP.NET Core specific files and directories
+bin/
+obj/
+**/*.user
+**/*.rsuser
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# ASP.NET Core environment files
+appsettings*.json
+.env
+.env.*
+
+# Angular specific files and directories
+node_modules/
+dist/
+tmp/
+out-tsc/
+coverage/
+.angular/
+.angular/cache/
+src/environments/environment*.ts
+
+# Angular build files
+build/
+cache/
+.eslintcache
+.husky/
+.idea/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS generated files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.Trash-*/
+
+# IDEs and editors
+.vscode/
+.vscode/*
+.idea/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/libraries/
+.idea/.idea_modules/
+.idea/*.iml
+.idea/modules.xml
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.vscode-test/
+
+# Visual Studio specific files
+.vscode/
+*.vs/
+.vs/
+*.csproj.user
+*.csproj.vscode
+*.csproj.dotnet
+.vscode/.history/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+
+# Rider IDE specific
+.idea/
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/libraries
+.idea/**/.idea_modules
+.idea/**/*.iml
+.idea/**/modules.xml
+
+# Temporary files and backups
+*.swp
+*.bak
+*~
+*.tmp
+*.temp
+*.log
+*.trace
+*.cache
+
+# Config files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated files
+**/generated/
+**/swagger/
+
+# Backup files
+*.bak
+*.old
+*.orig
+*.save
+
+# JetBrains Rider project-specific files
+.idea/
+.idea/*.iml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/libraries/
+
+# Common configuration files
+docker-compose.override.yml
+docker-compose.*
+Dockerfile
+*.dockerignore
+
+# Ignore Snyk files
+.snyk
+
+# Ignore coverage reports
+coverage/
+*.lcov
+.lcov-report/
+istanbul/
+
+# Ignore dependency directory for Angular
+node_modules/
+
+# Ignore compiled TypeScript
+*.d.ts
+*.ngfactory.ts
+*.ngsummary.json
+*.ngstyle.ts
+*.tsbuildinfo
+
+# Angular Cache
+.angular/cache/
+
+# Output directories
+dist/
+build/
+temp/
+release/
+
+# MacOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride

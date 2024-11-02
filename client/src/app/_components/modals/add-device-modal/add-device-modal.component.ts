@@ -34,6 +34,7 @@ export class AddDeviceModalComponent implements OnInit {
       const formValues = this.deviceForm.value;
 
       const device: Device = {
+        id: 0,
         brand: formValues.brand,
         manufacturer: formValues.manufacturer,
         modelName: formValues.model,

@@ -19,7 +19,11 @@ export class DevicesService {
     return this.http.post<Device>(this.apiUrl, device);
   }
 
-  public editDevice(device: Device, deviceId: number): Observable<Device> {
-    return this.http.put<Device>(`${this.apiUrl}/${deviceId}`, device);
+  public editDevice(device: Device): Observable<Device> {
+    return this.http.put<Device>(this.apiUrl, device);
+  }
+
+  public deleteDevice(id: number) {
+    return this.http.delete<number>(`${this.apiUrl}/${id}`);
   }
 }

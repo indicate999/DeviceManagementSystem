@@ -56,12 +56,12 @@ namespace API.Controllers
 			return BadRequest("Problem adding device");
 		}
 		
-		[HttpPut("{deviceId}")]
-		public ActionResult EditDevice([FromBody] DeviceDto updatedDeviceDto, int deviceId) 
+		[HttpPut]
+		public ActionResult EditDevice([FromBody] DeviceDto updatedDeviceDto) 
 		{
 			_logger.LogDebug("edit");
 			
-			var existingDevice = _deviceRepository.GetDeviceById(deviceId);
+			var existingDevice = _deviceRepository.GetDeviceById(updatedDeviceDto.Id);
 			
 			if (existingDevice == null)
 			{
@@ -88,6 +88,27 @@ namespace API.Controllers
 			
 			return NoContent();
 		}
-
+		
+		[HttpDelete("{deviceId}")]
+		public ActionResult DeleteDevice(int deviceId) 
+		{
+			_logger.LogDebug("delete");
+			
+			var deletingDevice = _deviceRepository.GetDeviceById(deviceId);
+			
+			if (deletingDevice == null)
+			{
+				return NotFound("Device not found.");
+			}
+			
+			_deviceRepository.DeleteDevice(deletingDevice);
+			
+			if (!_deviceRepository.Complete())
+			{
+				return StatusCode(500, "An error occurred while updating the device.");
+			}
+			
+			return NoContent();
+		}
 	}
 }

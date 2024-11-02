@@ -11,7 +11,7 @@ import { DevicesService } from 'src/app/_services/devices.service';
 })
 export class EditDeviceModalComponent implements OnInit {
   @Input() deviceData!: Device;
-  @Input() deviceId!: number;
+  //@Input() deviceId!: number;
   @Output() deviceEditted = new EventEmitter<void>();
 
   title = 'Edit device';
@@ -43,21 +43,30 @@ export class EditDeviceModalComponent implements OnInit {
       const formValues = this.editDeviceForm.value;
 
       const device: Device = {
+        id: this.deviceData.id,
         brand: formValues.brand,
         manufacturer: formValues.manufacturer,
         modelName: formValues.model,
         operatingSystem: formValues.operatingSystem
       };
 
-      this.editDevice(device, this.deviceId);
+      this.editDevice(device);
 
       this.bsModalRef.hide();
     }
   }
 
-  editDevice(device: Device, deviceId: number) {
-    this.devicesService.editDevice(device, deviceId).subscribe( response => {
+  editDevice(device: Device) {
+    this.devicesService.editDevice(device).subscribe( response => {
       this.deviceEditted.emit();
     });
+  }
+
+  deleteDevice() {
+    this.devicesService.deleteDevice(this.deviceData.id).subscribe( response => {
+      this.deviceEditted.emit();
+    });
+
+    this.bsModalRef.hide();
   }
 }
