@@ -26,7 +26,6 @@ builder.Services.AddDbContext<DataContext>(opt => {
 
 builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,7 +38,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-
 // Apply the CORS policy
 app.UseCors("AllowAngularApp");
 
@@ -47,7 +45,20 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Path to the SQLite database file
+var databasePath = Path.Combine(Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..")), "database");
+// Ensure the database directory exists
+if (!Directory.Exists(databasePath))
+{
+    Directory.CreateDirectory(databasePath);
+}
 
+// Ensure database is created on startup
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+    context.Database.Migrate(); // Ensures the database and tables are created if they don't exist
+}
 
 app.Run();
 

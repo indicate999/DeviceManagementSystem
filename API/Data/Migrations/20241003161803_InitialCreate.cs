@@ -25,6 +25,17 @@ namespace API.Data.Migrations
                 {
                     table.PrimaryKey("PK_Devices", x => x.Id);
                 });
+
+            // Seed data for the Devices table
+            migrationBuilder.InsertData(
+                table: "Devices",
+                columns: new[] { "Id", "Brand", "Manufacturer", "ModelName", "OperatingSystem" },
+                values: new object[,]
+                {
+                { 1, "Apple", "Apple Inc.", "iPhone 13", "iOS" },
+                { 2, "Samsung", "Samsung Electronics", "Galaxy S21", "Android" },
+                { 3, "Google", "Google LLC", "Pixel 6", "Android" }
+                });
         }
 
         /// <inheritdoc />

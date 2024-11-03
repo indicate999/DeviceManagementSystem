@@ -147,6 +147,7 @@ dist/
 build/
 temp/
 release/
+database/
 
 # MacOS specific files
 .DS_Store
