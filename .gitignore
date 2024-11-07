@@ -147,8 +147,13 @@ dist/
 build/
 temp/
 release/
+database/
 
 # MacOS specific files
 .DS_Store
 .AppleDouble
 .LSOverride
+
+
+API.AssemblyInfo.cs
+API.AssemblyInfoInputs.cache

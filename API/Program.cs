@@ -48,6 +48,19 @@ app.UseAuthorization();
 app.MapControllers();
 
 
+var databasePath = Path.Combine(Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..")), "database");
+
+if (!Directory.Exists(databasePath))
+{
+    Directory.CreateDirectory(databasePath);
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+    context.Database.Migrate();
+}
+
 
 app.Run();
 
