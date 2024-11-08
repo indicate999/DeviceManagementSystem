@@ -153,3 +153,7 @@ database/
 .DS_Store
 .AppleDouble
 .LSOverride
+
+
+API.AssemblyInfo.cs
+API.AssemblyInfoInputs.cache

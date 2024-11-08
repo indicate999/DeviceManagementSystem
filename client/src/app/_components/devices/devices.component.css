@@ -58,3 +58,27 @@
   .big-button:hover {
     background-color: #a3940f;  
   }
+
+  .delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .delete-button img {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .item:hover .delete-button {
+    display: flex;
+  }

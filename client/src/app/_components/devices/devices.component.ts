@@ -46,6 +46,13 @@ export class DevicesComponent implements OnInit{
       this.loadDevices();
     });
   }
+
+  deleteDevice(device: Device, event: Event) {
+    event.stopPropagation();
+    this.devicesService.deleteDevice(device.id).subscribe( response => {
+      this.loadDevices();
+    });
+  }
 }
 
 

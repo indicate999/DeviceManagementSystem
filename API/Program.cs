@@ -45,20 +45,20 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// Path to the SQLite database file
+
 var databasePath = Path.Combine(Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..")), "database");
-// Ensure the database directory exists
+
 if (!Directory.Exists(databasePath))
 {
     Directory.CreateDirectory(databasePath);
 }
 
-// Ensure database is created on startup
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<DataContext>();
-    context.Database.Migrate(); // Ensures the database and tables are created if they don't exist
+    context.Database.Migrate();
 }
+
 
 app.Run();
 
