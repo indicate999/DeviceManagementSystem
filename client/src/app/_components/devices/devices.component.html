@@ -6,6 +6,14 @@
 
 <div class="container">
   <div class="item" *ngFor="let device of devices; let i = index" (click)="openEditDeviceModal(i)">
+    <button class="delete-button" (click)="deleteDevice(device,  $event)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 6h18" stroke="white" stroke-width="2" stroke-linecap="round" />
+        <path d="M8 6v14a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6" stroke="white" stroke-width="2" />
+        <path d="M10 10v8M14 10v8" stroke="white" stroke-width="2" stroke-linecap="round" />
+        <rect x="1" y="3" width="22" height="3" fill="red" />
+      </svg>
+    </button>
     <h3 style="text-align: center;">{{ i + 1 }}</h3>
     <ul style="list-style-type: none; padding-top: 20px;">
       <li>

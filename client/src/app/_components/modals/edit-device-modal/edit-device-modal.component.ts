@@ -61,12 +61,4 @@ export class EditDeviceModalComponent implements OnInit {
       this.deviceEditted.emit();
     });
   }
-
-  deleteDevice() {
-    this.devicesService.deleteDevice(this.deviceData.id).subscribe( response => {
-      this.deviceEditted.emit();
-    });
-
-    this.bsModalRef.hide();
-  }
 }
