@@ -1,6 +1,6 @@
 using API.Data.Entities;
 
-namespace API.Data.Repositories;
+namespace API.Data.Repositories.Interfaces;
 public interface IDeviceRepository
 {
 	List<Device> GetDevices();

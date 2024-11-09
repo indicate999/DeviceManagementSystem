@@ -1,5 +1,6 @@
+using API.BusinessLogic.Extensions;
 using API.Data;
-using API.Data.Repositories;
+using API.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +25,8 @@ builder.Services.AddDbContext<DataContext>(opt => {
 	opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
+builder.Services.AddServices();
+builder.Services.AddRepositories();
 
 
 var app = builder.Build();
