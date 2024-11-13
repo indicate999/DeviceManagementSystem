@@ -1,6 +1,7 @@
 using API.Data;
-using API.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
+using API.Data.Extensions;
+using API.BusinessLogic.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,8 +25,8 @@ builder.Services.AddDbContext<DataContext>(opt => {
 	opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
-
+builder.Services.AddServices();
+builder.Services.AddRepositories();
 
 var app = builder.Build();
 
@@ -52,13 +53,13 @@ var databasePath = Path.Combine(Path.GetFullPath(Path.Combine(Directory.GetCurre
 
 if (!Directory.Exists(databasePath))
 {
-    Directory.CreateDirectory(databasePath);
+	Directory.CreateDirectory(databasePath);
 }
 
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<DataContext>();
-    context.Database.Migrate();
+	var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+	context.Database.Migrate();
 }
 
 

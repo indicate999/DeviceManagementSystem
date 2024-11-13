@@ -1,9 +1,8 @@
-using API.Data;
-using API.Data.Entities;
-using API.Data.Repositories;
-using API.BisnessLogic.DTOs;
+using API.BusinessLogic.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using API.BusinessLogic.Services.Interfaces;
+using API.BusinessLogic.Exceptions;
+using API.Data.Entities;
 
 namespace API.Controllers
 {
@@ -11,12 +10,12 @@ namespace API.Controllers
 	[ApiController]
 	public class DevicesController : ControllerBase
 	{
-		private readonly IDeviceRepository _deviceRepository;
+		private readonly IDeviceService _deviceService;
 		private readonly ILogger<DevicesController> _logger;
 
-		public DevicesController(IDeviceRepository deviceRepository, ILogger<DevicesController> logger)
+		public DevicesController(IDeviceService deviceService, ILogger<DevicesController> logger)
 		{
-			_deviceRepository = deviceRepository;
+			_deviceService = deviceService;
 			_logger = logger;
 		}
 
@@ -25,89 +24,75 @@ namespace API.Controllers
 		{
 			_logger.LogDebug("get");
 
-			return _deviceRepository.GetDevices();
+			return _deviceService.GetDevices();
 		}
 
 		[HttpPost]
 		public IActionResult AddDevice([FromBody] DeviceDto deviceDto)
 		{
 			_logger.LogDebug("add");
-			
+
 			if (deviceDto == null)
 			{
 				return BadRequest();
 			}
 
-			var device = new Device
+			try
 			{
-				Brand = deviceDto.Brand,
-				Manufacturer = deviceDto.Manufacturer,
-				ModelName = deviceDto.ModelName,
-				OperatingSystem = deviceDto.OperatingSystem
-			};
-
-			_deviceRepository.AddDevice(device);
-
-			if (_deviceRepository.Complete())
+				_deviceService.AddDevice(deviceDto);
+			}
+			catch (DbChangesNotSavedException exception)
 			{
-				return CreatedAtAction(nameof(AddDevice), device);
+				return StatusCode(500, exception.Message);
 			}
 
-			return BadRequest("Problem adding device");
+			return CreatedAtAction(nameof(AddDevice), deviceDto);
 		}
-		
+
 		[HttpPut]
-		public ActionResult EditDevice([FromBody] DeviceDto updatedDeviceDto) 
+		public ActionResult EditDevice([FromBody] DeviceDto updatedDeviceDto)
 		{
 			_logger.LogDebug("edit");
-			
-			var existingDevice = _deviceRepository.GetDeviceById(updatedDeviceDto.Id);
-			
-			if (existingDevice == null)
+
+			if (updatedDeviceDto == null)
 			{
-				return NotFound("Device not found.");
+				return BadRequest();
 			}
-			
-			if (existingDevice.Brand == updatedDeviceDto.Brand 
-				&& existingDevice.Manufacturer == updatedDeviceDto.Manufacturer
-				&& existingDevice.ModelName == updatedDeviceDto.ModelName 
-				&& existingDevice.OperatingSystem == updatedDeviceDto.OperatingSystem)
+
+			try
 			{
-				return BadRequest("You can not edit device without changes");
+				_deviceService.UpdateDevice(updatedDeviceDto);
 			}
-			
-			existingDevice.Brand = updatedDeviceDto.Brand;
-			existingDevice.Manufacturer = updatedDeviceDto.Manufacturer;
-			existingDevice.ModelName = updatedDeviceDto.ModelName;
-			existingDevice.OperatingSystem = updatedDeviceDto.OperatingSystem;
-			
-			if (!_deviceRepository.Complete())
+			catch (DeviceNotFoundException exception)
 			{
-				return StatusCode(500, "An error occurred while updating the device.");
+				return BadRequest(exception.Message);
 			}
-			
+			catch (DbChangesNotSavedException exception)
+			{
+				return StatusCode(500, exception.Message);
+			}
+
 			return NoContent();
 		}
-		
+
 		[HttpDelete("{deviceId}")]
-		public ActionResult DeleteDevice(int deviceId) 
+		public ActionResult DeleteDevice(int deviceId)
 		{
 			_logger.LogDebug("delete");
-			
-			var deletingDevice = _deviceRepository.GetDeviceById(deviceId);
-			
-			if (deletingDevice == null)
+
+			try
 			{
-				return NotFound("Device not found.");
+				_deviceService.DeleteDevice(deviceId);
 			}
-			
-			_deviceRepository.DeleteDevice(deletingDevice);
-			
-			if (!_deviceRepository.Complete())
+			catch (DeviceNotFoundException exception)
 			{
-				return StatusCode(500, "An error occurred while updating the device.");
+				return BadRequest(exception.Message);
 			}
-			
+			catch (DbChangesNotSavedException exception)
+			{
+				return StatusCode(500, exception.Message);
+			}
+
 			return NoContent();
 		}
 	}

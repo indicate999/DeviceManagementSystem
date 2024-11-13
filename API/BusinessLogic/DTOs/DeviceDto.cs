@@ -1,6 +1,4 @@
-using System;
-
-namespace API.BisnessLogic.DTOs;
+namespace API.BusinessLogic.DTOs;
 
 public class DeviceDto
 {
