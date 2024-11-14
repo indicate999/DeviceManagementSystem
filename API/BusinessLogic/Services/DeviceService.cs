@@ -3,16 +3,19 @@ using API.BusinessLogic.Exceptions;
 using API.BusinessLogic.Services.Interfaces;
 using API.Data.Entities;
 using API.Data.Repositories.Interfaces;
+using AutoMapper;
 
 namespace API.BusinessLogic.Services;
 
 public class DeviceService : IDeviceService
 {
 	private readonly IDeviceRepository _deviceRepository;
+	private readonly IMapper _mapper;
 
-	public DeviceService(IDeviceRepository deviceRepository)
+	public DeviceService(IDeviceRepository deviceRepository, IMapper mapper)
 	{
 		_deviceRepository = deviceRepository;
+		_mapper = mapper;
 	}
 	public List<Device> GetDevices()
 	{
@@ -21,13 +24,7 @@ public class DeviceService : IDeviceService
 
 	public void AddDevice(DeviceDto deviceDto)
 	{
-		var device = new Device
-		{
-			Brand = deviceDto.Brand,
-			Manufacturer = deviceDto.Manufacturer,
-			ModelName = deviceDto.ModelName,
-			OperatingSystem = deviceDto.OperatingSystem
-		};
+		var device = _mapper.Map<Device>(deviceDto);
 
 		_deviceRepository.AddDevice(device);
 
@@ -47,10 +44,7 @@ public class DeviceService : IDeviceService
 			throw new DeviceNotFoundException();
 		}
 
-		existingDevice.Brand = updatedDeviceDto.Brand;
-		existingDevice.Manufacturer = updatedDeviceDto.Manufacturer;
-		existingDevice.ModelName = updatedDeviceDto.ModelName;
-		existingDevice.OperatingSystem = updatedDeviceDto.OperatingSystem;
+		_mapper.Map(updatedDeviceDto, existingDevice);
 
 		if (!_deviceRepository.Complete())
 		{

@@ -27,6 +27,7 @@ builder.Services.AddDbContext<DataContext>(opt => {
 
 builder.Services.AddServices();
 builder.Services.AddRepositories();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
