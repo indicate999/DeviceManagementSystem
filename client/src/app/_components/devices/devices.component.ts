@@ -1,10 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DevicesService } from 'src/app/_services/devices.service';
 import { Device } from 'src/app/_models/device';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { AddDeviceModalComponent } from '../modals/add-device-modal/add-device-modal.component';
-import { EditDeviceModalComponent } from '../modals/edit-device-modal/edit-device-modal.component';
+import { DeviceEditorComponent } from '../modals/device-editor/device-editor.component';
 
 @Component({
   selector: 'app-devices',
@@ -14,8 +12,7 @@ import { EditDeviceModalComponent } from '../modals/edit-device-modal/edit-devic
 export class DevicesComponent implements OnInit{
 
   devices: Device[] = [];
-  addDeviceBsModalRef: BsModalRef<AddDeviceModalComponent> = new BsModalRef<AddDeviceModalComponent>();
-  editDeviceBsModalRef: BsModalRef<EditDeviceModalComponent> = new BsModalRef<EditDeviceModalComponent>();
+  deviceBsModalRef: BsModalRef<DeviceEditorComponent> = new BsModalRef<DeviceEditorComponent>();
 
   constructor(private devicesService: DevicesService, private modalService: BsModalService) {}
 
@@ -30,19 +27,22 @@ export class DevicesComponent implements OnInit{
   }
  
   openAddDeviceModal() {
-    this.addDeviceBsModalRef = this.modalService.show(AddDeviceModalComponent);
+    const initialState = { title: "Add device", closeBtnName: "Cancel", submitBtnName: "Add" };
 
-    this.addDeviceBsModalRef.content!.deviceAdded.subscribe(() => {
-      this.loadDevices();
-    });
+    this.openDeviceModal(initialState);
   }
 
   openEditDeviceModal(deviceID: number) {
-    const initialState = { deviceData: this.devices[deviceID]};
+    const initialState = { deviceData: this.devices[deviceID],
+      title: "Edit device", closeBtnName: "Cancel", submitBtnName: "Save" };
 
-    this.editDeviceBsModalRef = this.modalService.show(EditDeviceModalComponent, { initialState });
+    this.openDeviceModal(initialState);
+  }
 
-    this.editDeviceBsModalRef.content!.deviceEditted.subscribe(() => {
+  openDeviceModal(initialState: any) {
+    this.deviceBsModalRef = this.modalService.show(DeviceEditorComponent, { initialState } );
+
+    this.deviceBsModalRef.content!.deviceEdited.subscribe(() => {
       this.loadDevices();
     });
   }

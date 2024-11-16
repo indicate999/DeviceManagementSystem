@@ -6,20 +6,20 @@
   </div>
   
   <div class="modal-body">
-    <form [formGroup]="editDeviceForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="deviceForm" (ngSubmit)="onSubmit()">
 
       <div class="mb-3">
         <label for="brand" class="form-label">Brand</label>
         <input id="brand" type="text" class="form-control" formControlName="brand">
-        <div *ngIf="editDeviceForm.get('brand')?.invalid && editDeviceForm.get('brand')?.touched" class="text-danger">
-          Brand is required and must be at least 3 characters long.
+        <div *ngIf="deviceForm.get('brand')?.invalid && deviceForm.get('brand')?.touched" class="text-danger">
+          Brand is required and must be at least 2 characters long.
         </div>
       </div>
   
       <div class="mb-3">
         <label for="manufacturer" class="form-label">Manufacturer</label>
         <input id="manufacturer" type="text" class="form-control" formControlName="manufacturer">
-        <div *ngIf="editDeviceForm.get('manufacturer')?.invalid && editDeviceForm.get('manufacturer')?.touched" class="text-danger">
+        <div *ngIf="deviceForm.get('manufacturer')?.invalid && deviceForm.get('manufacturer')?.touched" class="text-danger">
           Manufacturer is required and must be at least 2 characters long.
         </div>
       </div>
@@ -27,7 +27,7 @@
       <div class="mb-3">
         <label for="model" class="form-label">Model</label>
         <input id="model" type="text" class="form-control" formControlName="model">
-        <div *ngIf="editDeviceForm.get('model')?.invalid && editDeviceForm.get('model')?.touched" class="text-danger">
+        <div *ngIf="deviceForm.get('model')?.invalid && deviceForm.get('model')?.touched" class="text-danger">
           Model is required and must be at least 2 characters long.
         </div>
       </div>
@@ -35,15 +35,14 @@
       <div class="mb-3">
         <label for="operatingSystem" class="form-label">Operating System</label>
         <input id="operatingSystem" type="text" class="form-control" formControlName="operatingSystem">
-        <div *ngIf="editDeviceForm.get('operatingSystem')?.invalid && editDeviceForm.get('operatingSystem')?.touched" class="text-danger">
+        <div *ngIf="deviceForm.get('operatingSystem')?.invalid && deviceForm.get('operatingSystem')?.touched" class="text-danger">
           Operating System is required and must be at least 2 characters long.
         </div>
       </div>
   
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
-        <button type="submit" class="btn btn-primary" [disabled]="editDeviceForm.invalid || editDeviceForm.pristine">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">{{ closeBtnName }}</button>
+        <button type="submit" class="btn btn-primary" [disabled]="deviceForm.invalid || deviceForm.pristine">{{ submitBtnName }}</button>
       </div>
     </form>
   </div>
-  
