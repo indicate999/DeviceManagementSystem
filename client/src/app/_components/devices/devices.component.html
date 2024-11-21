@@ -1,11 +1,11 @@
 <h2 style="padding-bottom: 50px;">Devices</h2>
 
 <div class="big-button-container">
-  <button (click)="openAddDeviceModal()" class="big-button">Add device</button>
+  <button (click)="openAddDeviceEditor()" class="big-button">Add device</button>
 </div>
 
 <div class="container">
-  <div class="item" *ngFor="let device of devices; let i = index" (click)="openEditDeviceModal(i)">
+  <div class="item" *ngFor="let device of devices; let i = index" (click)="openUpdateDeviceEditor(i)">
     <button class="delete-button" (click)="deleteDevice(device,  $event)">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M3 6h18" stroke="white" stroke-width="2" stroke-linecap="round" />

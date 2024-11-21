@@ -26,20 +26,20 @@ export class DevicesComponent implements OnInit{
     });
   }
  
-  openAddDeviceModal() {
+  openAddDeviceEditor() {
     const initialState = { title: "Add device", closeBtnName: "Cancel", submitBtnName: "Add" };
 
-    this.openDeviceModal(initialState);
+    this.openDeviceEditor(initialState);
   }
 
-  openEditDeviceModal(deviceID: number) {
+  openUpdateDeviceEditor(deviceID: number) {
     const initialState = { deviceData: this.devices[deviceID],
       title: "Edit device", closeBtnName: "Cancel", submitBtnName: "Save" };
 
-    this.openDeviceModal(initialState);
+    this.openDeviceEditor(initialState);
   }
 
-  openDeviceModal(initialState: any) {
+  openDeviceEditor(initialState: any) {
     this.deviceBsModalRef = this.modalService.show(DeviceEditorComponent, { initialState } );
 
     this.deviceBsModalRef.content!.deviceEdited.subscribe(() => {
